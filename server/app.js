@@ -3,11 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var multer = require('multer'); // 用于inputAxios上传，会覆盖uploadInputForm的formidable。
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+app.use(multer({dest: __dirname + '/tmp/'}).array('file')); // 用于inputAxios上传，会覆盖uploadInputForm的formidable。
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

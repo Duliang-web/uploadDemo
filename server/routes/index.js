@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 
+/* 用于  uploadInputForm 图片上传 */
 const formidable = require('formidable');
 
 /* GET home page. */
@@ -9,6 +10,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+/* uploadInputForm 单图上传 */
 router.post('/uploadInputForm', function(req, res, next) {
   var form = new formidable.IncomingForm();
   form.uploadDir = './public/images/';
@@ -18,6 +20,7 @@ router.post('/uploadInputForm', function(req, res, next) {
   })
 });
 
+/* uploadInputForm 多图上传 */
 router.post('/uploadInputFormMultiple', function(req, res, next) {
   var form = new formidable.IncomingForm();
   form.uploadDir = './public/images/';
@@ -30,6 +33,7 @@ router.post('/uploadInputFormMultiple', function(req, res, next) {
   })
 });
 
+/* uploadAxios 单图上传 */
 router.post('/uploadAxios', function(req, res, next) {
   res.send('respond with a resource');
 });

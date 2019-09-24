@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
+let path = require('path');
 
 /* 用于  uploadInputForm 图片上传 */
 const formidable = require('formidable');
@@ -35,7 +36,16 @@ router.post('/uploadInputFormMultiple', function(req, res, next) {
 
 /* uploadAxios 单图上传 */
 router.post('/uploadAxios', function(req, res, next) {
-  res.send('respond with a resource');
+  var des_file = path.resolve(__dirname, '..') + '/public/images/' + req.files[0].originalname;
+  fs.readFile(req.files[0].path, (err, data) => {
+    fs.writeFile(des_file, data, (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.end('upload success');
+      }
+    });
+  });
 });
 
 module.exports = router;

@@ -48,4 +48,20 @@ router.post('/uploadAxios', function(req, res, next) {
   });
 });
 
+/* uploadAxios 多图上传 */
+router.post('/uploadAxiosMultiple', function(req, res, next) {
+  req.files.forEach((item) => {
+    var des_file = path.resolve(__dirname, '..') + '/public/images/' + item.originalname;
+    fs.readFile(item.path, (err, data) => {
+      fs.writeFile(des_file, data, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.end('upload success');
+        }
+      });
+    });
+  })
+});
+
 module.exports = router;

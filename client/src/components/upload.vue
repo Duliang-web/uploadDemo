@@ -40,6 +40,18 @@
         value="上传"
         @click="postUploadAxios">
     </div>
+    <p>uploadAxios 多图上传：</p>
+    <div class="upload-axios">
+      <input
+        type="file"
+        name="file"
+        ref="fileMultiple"
+        multiple>
+      <input
+        type="submit"
+        value="上传"
+        @click="postUploadAxiosMultiple">
+    </div>
   </div>
 </template>
 
@@ -61,6 +73,19 @@ export default {
       const data = new FormData()
       data.append('file', file, file.name)
       let res = await apis.Common.postUploadAxios({
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        data: data
+      })
+      console.log(res)
+    },
+    async postUploadAxiosMultiple () {
+      const data = new FormData()
+      for (var i = 0; i < this.$refs.fileMultiple.files.length; i++) {
+        data.append('file', this.$refs.fileMultiple.files[i], this.$refs.fileMultiple.files[i].name)
+      }
+      let res = await apis.Common.postUploadAxiosMultiple({
         headers: {
           'Content-Type': 'multipart/form-data'
         },

@@ -64,20 +64,18 @@ router.post('/uploadAxiosMultiple', function(req, res, next) {
   })
 });
 
-/* elementui 单图、多图上传 */
+/* elementui 单图、多图上传，上传多图时，多次调用此接口，每次一张图片 */
 router.post('/elementui', function(req, res, next) {
-  req.files.forEach((item) => {
-    var des_file = path.resolve(__dirname, '..') + '/public/images/' + item.originalname;
-    fs.readFile(item.path, (err, data) => {
-      fs.writeFile(des_file, data, (err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          res.end('upload success');
-        }
-      });
+  var des_file = path.resolve(__dirname, '..') + '/public/images/' + req.files[0].originalname;
+  fs.readFile(req.files[0].path, (err, data) => {
+    fs.writeFile(des_file, data, (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.end('upload success');
+      }
     });
-  })
+  });
 });
 
 module.exports = router;

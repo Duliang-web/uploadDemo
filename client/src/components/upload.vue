@@ -52,6 +52,23 @@
         value="上传"
         @click="postUploadAxiosMultiple">
     </div>
+    <p>elementui 单图上传：</p>
+    <div class="element-ui">
+      <el-upload
+        action="/apis/elementui"
+        list-type="picture-card">
+        <i class="el-icon-plus"/>
+      </el-upload>
+    </div>
+    <p>elementui 多图上传：</p>
+    <div class="element-ui">
+      <el-upload
+        action="/apis/elementui"
+        list-type="picture-card"
+        multiple>
+        <i class="el-icon-plus"/>
+      </el-upload>
+    </div>
   </div>
 </template>
 
